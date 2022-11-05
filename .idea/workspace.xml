@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f96c8906-b5d9-4422-b36c-bf1e01735509" name="Changes" comment="">
+    <list default="true" id="f96c8906-b5d9-4422-b36c-bf1e01735509" name="Changes" comment="[기능 추가]구글 번역기 사용 엑셀 시트 번역 기능 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ExcelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ExcelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Translator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +50,14 @@
       <option name="presentableId" value="Default" />
       <updated>1667653073252</updated>
     </task>
+    <task id="LOCAL-00001" summary="[기능 추가]구글 번역기 사용 엑셀 시트 번역 기능 추가">
+      <created>1667680980563</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667680980563</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -64,5 +70,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[기능 추가]구글 번역기 사용 엑셀 시트 번역 기능 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="[기능 추가]구글 번역기 사용 엑셀 시트 번역 기능 추가" />
   </component>
 </project>

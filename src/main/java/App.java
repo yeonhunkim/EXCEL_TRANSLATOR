@@ -9,6 +9,6 @@ public class App
         ExcelController controller = new ExcelController();
         //controller.convertExcelToCsv("C:\\Users\\E211102\\Downloads\\SKBA2_모듈동_에러코드_221007.xlsx");
         //controller.translateCsvToExcel("test.csv", "SKBA2_module_errorcode_221007.xlsx");
-        controller.translateExcel("C:\\Users\\E211102\\Downloads\\SKBA2_모듈동_에러코드_221007.xlsx", "SKBA2_module_errorcode_221007.xlsx");
+        controller.translateExcel("C:\\Users\\E211102\\Downloads\\SKBA2 전극VDSC Error Code_ver.221012.xlsx", "SKBA2_Electrode_VDSC_ErrorCode_ver.221012.xlsx");
     }
 }

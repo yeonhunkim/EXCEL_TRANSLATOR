@@ -143,6 +143,9 @@ public class ExcelController {
                             cellString = sourceCell.getStringCellValue();
                             break;
                     }
+                    if (cellString.length() == 0) {
+                        continue;
+                    }
                     String resultString = Translator.sendStringToPapago(cellString);
                     System.out.println(resultString);
                     targetCell.setCellValue(resultString);
