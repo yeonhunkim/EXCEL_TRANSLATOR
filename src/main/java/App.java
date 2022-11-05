@@ -3,13 +3,12 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println("안녕하세요?");
-        Translator translator = new Translator();
-        String test = translator.putTextToPapago("MASTER EMO가 눌렸을 때 발생");
-        System.out.println(test);
-        String test2 = translator.putTextToPapago("안녕하십니까");
-        System.out.println(test2);
-        //ExcelController controller = new ExcelController();
-        //controller.write(test);
+        System.setProperty("GOOGLE_API_KEY", "AIzaSyCBVdYYCDaAzNWhteALLJTqYFGctat3jmk");
+        //String test = Translator.sendStringToPapago("MASTER EMO가 눌렸을 때 발생\n");
+        //System.out.println(test);
+        ExcelController controller = new ExcelController();
+        //controller.convertExcelToCsv("C:\\Users\\E211102\\Downloads\\SKBA2_모듈동_에러코드_221007.xlsx");
+        //controller.translateCsvToExcel("test.csv", "SKBA2_module_errorcode_221007.xlsx");
+        controller.translateExcel("C:\\Users\\E211102\\Downloads\\SKBA2_모듈동_에러코드_221007.xlsx", "SKBA2_module_errorcode_221007.xlsx");
     }
 }

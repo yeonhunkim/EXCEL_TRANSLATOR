@@ -1,40 +1,82 @@
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import com.google.cloud.translate.Translation;
+import org.json.JSONObject;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Translator {
-    private String clientId =  "Oy_jT3nPCovd59npamqt";
-    private String clientSecret = "wcnNvd7cmp";
-    String apiURL = "https://openapi.naver.com/v1/papago/n2mt";
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
 
-    public String putTextToPapago(String inputText) {
+public class Translator {
+    private static String clientId =  "Oy_jT3nPCovd59npamqt";
+    private static String clientSecret = "wcnNvd7cmp";
+    private static String apiURL = "https://openapi.naver.com/v1/papago/n2mt";
+
+    private static Translate translate = TranslateOptions.getDefaultInstance().getService();
+
+    public static String readStringFromCsv(String filePath) {
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(filePath));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String line;
+        StringBuilder resultString = new StringBuilder();
+        while (true)   //returns a Boolean value
+        {
+            try {
+                line = br.readLine();
+                if (line == null) break;
+                resultString.append(line + "\n");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return resultString.toString();
+    }
+
+    public static String sendStringToPapago(String input) {
         String text = "";
         try {
-            text = URLEncoder.encode(inputText, "UTF-8");
+            text = URLEncoder.encode(input, "UTF-8");
         } catch (Exception e) {
             throw new RuntimeException("인코딩 실패", e);
         }
 
-        System.out.println(text);
+        Translation translation = translate.translate(
+                input,
+                Translate.TranslateOption.sourceLanguage("ko"),
+                Translate.TranslateOption.targetLanguage("en"));
+        return translation.getTranslatedText();
 
+        /*
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("X-Naver-Client-Id", clientId);
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         String responseBody = post(apiURL, requestHeaders, text);
 
-        return responseBody;
+        JSONObject jsonObject = new JSONObject(responseBody);
+        String resultString = "";
+        try {
+            resultString = jsonObject.getJSONObject("message")
+                    .getJSONObject("result")
+                    .getString("translatedText");
+            //return responseBody;
+        } catch (Exception e) {
+            return "";
+        }
+
+        return resultString;
+        */
     }
 
-    private String post(String apiUrl, Map<String, String> requestHeaders, String text){
+    private static String post(String apiUrl, Map<String, String> requestHeaders, String text){
         HttpURLConnection con = connect(apiUrl);
         String postParams = "source=ko&target=en&text=" + text; //�������: �ѱ��� (ko) -> �������: ���� (en)
         try {
@@ -64,7 +106,7 @@ public class Translator {
         }
     }
 
-    private HttpURLConnection connect(String apiUrl){
+    private static HttpURLConnection connect(String apiUrl){
         try {
             URL url = new URL(apiUrl);
             return (HttpURLConnection)url.openConnection();
@@ -75,17 +117,15 @@ public class Translator {
         }
     }
 
-    private String readBody(InputStream body) throws UnsupportedEncodingException{
+    private static String readBody(InputStream body) throws UnsupportedEncodingException{
         InputStreamReader streamReader = new InputStreamReader(body, "EUC-KR");
 
         try (BufferedReader lineReader = new BufferedReader(streamReader)) {
             StringBuilder responseBody = new StringBuilder();
-
             String line;
             while ((line = lineReader.readLine()) != null) {
                 responseBody.append(line);
             }
-
             return responseBody.toString();
         } catch (IOException e) {
             throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
